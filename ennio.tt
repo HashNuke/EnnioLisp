@@ -67,12 +67,17 @@ module Ennio
                 / boolean
                 / single_quoted_string
                 / double_quoted_string
+                / nil_value
                 / dynamic_word
                 / s_expression
             )
             <Value>
         end
-        
+       
+        rule nil_value
+            "nil" <NilNode>
+        end
+
         rule list
             "'" space '(' (value space*) ')' <List>
         end

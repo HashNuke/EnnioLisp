@@ -39,6 +39,12 @@ module Ennio
         end
     end
 
+    class NilNode < Treetop::Runtime::SyntaxNode
+        def node_value
+            nil
+        end
+    end
+
     class IntegerNode < Treetop::Runtime::SyntaxNode
         def node_value
             text_value.to_i
