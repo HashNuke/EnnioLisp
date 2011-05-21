@@ -1,0 +1,104 @@
+module Ennio
+    grammar Scheme
+
+        rule program
+            (s_expression)* <Program>
+        end
+
+        rule s_expression
+            space
+            '('
+            space
+            (
+                operator
+                value* 
+            )
+            space
+            ')'
+            space
+            <SExpression>
+        end
+
+        rule operator
+            (
+                arithmetic_operator
+                / relational_operator
+                / logical_operator
+                / dynamic_word
+            )
+            <Operator>
+        end
+        
+        rule arithmetic_operator
+            (
+                "+"
+                / "-"
+                / "*"
+                / "/"
+                / "%"
+            )
+            <ArithmeticOperator>
+        end    
+            
+        rule relational_operator
+            (
+                "="
+                / "=!"
+                / "<"
+                / ">"
+                / "<="
+                / ">="
+            )
+            <RelationalOperator>
+        end
+        
+        rule logical_operator
+            ("and" / "or" / "not") <LogicalOperator>
+        end
+
+        rule dynamic_word
+            [^\s\n\r\t] <DynamicWord>
+        end
+
+        rule value
+            (
+                integer
+                / float
+                / boolean
+                / single_quoted_string
+                / double_quoted_string
+                / dynamic_word
+                / s_expression
+            )
+            <Value>
+        end
+        
+        rule list
+            "'" space '(' (value space*) ')' <List>
+        end
+
+        rule integer
+            [0-9]+ <IntegerNode>
+        end
+
+        rule float
+            [0-9]* "." [0-9]+ <FloatNode>
+        end
+        
+        rule boolean
+            ("#t" / "#f") <BooleanNode> 
+        end
+        
+        rule space
+            [\s\n\r\t]
+        end
+        
+        rule double_quoted_string
+            '"' ('\\"' / [^"])* '"' <DoubleQuotedString>
+        end
+
+        rule single_quored_string
+            "'" ("\\'" / [^'])* "'" <SingleQuotedString>
+        end
+    end
+end
