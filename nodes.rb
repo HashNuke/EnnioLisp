@@ -14,30 +14,40 @@ module Ennio
         end
     end
 
-    class Operator < Treetop::Runtime::SyntaxNode
-        def node_eval
+    module Operator
+        class Operator < Treetop::Runtime::SyntaxNode
+            def node_eval
+            end
+        end
+    end
+    
+    module ArithmeticOperator
+        class ArithmeticOperator < Treetop::Runtime::SyntaxNode
+            def node_eval
+            end
         end
     end
 
-    class ArithmeticOperator < Treetop::Runtime::SyntaxNode
-        def node_eval
+    module LogicalOperator
+        class LogicalOperator < Treetop::Runtime::SyntaxNode
+            def node_eval
+                text_value
+            end
         end
     end
 
-    class LogicalOperator < Treetop::Runtime::SyntaxNode
-        def node_eval
-            text_value
+    module RelationalOperator
+        class RelationalOperator < Treetop::Runtime::SyntaxNode
+            def node_eval
+                text_value
+            end
         end
     end
 
-    class RelationalOperator < Treetop::Runtime::SyntaxNode
-        def node_eval
-            text_value
-        end
-    end
-
-    class Value < Treetop::Runtime::SyntaxNode
-        def node_eval
+    module Value
+        class Value < Treetop::Runtime::SyntaxNode
+            def node_eval
+            end
         end
     end
 

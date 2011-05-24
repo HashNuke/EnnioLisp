@@ -2,7 +2,7 @@ module Ennio
     grammar Scheme
 
         rule program
-            (s_expression)* <Program>
+            s_expression* <Program>
         end
 
         rule s_expression

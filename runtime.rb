@@ -8,10 +8,13 @@ class EnnioRuntime
 
     def parse(data, scope=nil)
         puts data
-        scheme = Ennio::SchemeParser.new
+        parser = Ennio::SchemeParser.new
         scope ||= {:global=>{}, :local=>{}}
-        ast = scheme.parse data
+        ast = parser.parse data
         puts ast.class.name
+        if ast.nil?
+            puts parser.failure_reason
+        end
     end
 end
         
