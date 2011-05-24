@@ -12,5 +12,14 @@ File.open "samples/hello.lp" do |file|
 end
 
 ennio = Ennio::SchemeParser.new
+puts program_data
 ast = ennio.parse program_data
-puts ast
+if ast.nil?
+    puts "FAILURE: "
+    puts ennio.failure_reason
+    puts ennio.failure_line
+    puts ennio.failure_column
+else
+    puts "SUCCESS!"
+end
+

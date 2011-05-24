@@ -6,16 +6,17 @@ module Ennio
         end
 
         rule s_expression
-            space
+            space*
             '('
-            space
+            space*
             (
                 operator
-                value* 
+                space*
+                ( value space* )*
             )
-            space
+            space*
             ')'
-            space
+            space*
             <SExpression>
         end
 
@@ -79,7 +80,7 @@ module Ennio
         end
 
         rule list
-            "'" space '(' (value space*) ')' <List>
+            "'" space* '(' (value space*) ')' <List>
         end
 
         rule integer
@@ -102,7 +103,7 @@ module Ennio
             '"' ('\\"' / [^"])* '"' <DoubleQuotedString>
         end
 
-        rule single_quored_string
+        rule single_quoted_string
             "'" ("\\'" / [^'])* "'" <SingleQuotedString>
         end
     end

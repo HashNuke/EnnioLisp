@@ -1,5 +1,6 @@
 module Ennio
 
+    module Program
     class Program < Treetop::Runtime::SyntaxNode
         def node_eval(scope)
             puts text_value
@@ -7,6 +8,7 @@ module Ennio
                 puts e.class.name 
             end
         end
+    end
     end
     
     class SExpression < Treetop::Runtime::SyntaxNode
