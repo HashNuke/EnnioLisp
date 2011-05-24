@@ -478,18 +478,24 @@ module Ennio
                   r0 = r5
                   r0.extend(Value)
                 else
-                  r6 = _nt_dynamic_word
+                  r6 = _nt_nil_value
                   if r6
                     r0 = r6
                     r0.extend(Value)
                   else
-                    r7 = _nt_s_expression
+                    r7 = _nt_dynamic_word
                     if r7
                       r0 = r7
                       r0.extend(Value)
                     else
-                      @index = i0
-                      r0 = nil
+                      r8 = _nt_s_expression
+                      if r8
+                        r0 = r8
+                        r0.extend(Value)
+                      else
+                        @index = i0
+                        r0 = nil
+                      end
                     end
                   end
                 end
@@ -499,6 +505,30 @@ module Ennio
         end
 
         node_cache[:value][start_index] = r0
+
+        r0
+      end
+
+      def _nt_nil_value
+        start_index = index
+        if node_cache[:nil_value].has_key?(index)
+          cached = node_cache[:nil_value][index]
+          if cached
+            cached = SyntaxNode.new(input, index...(index + 1)) if cached == true
+            @index = cached.interval.end
+          end
+          return cached
+        end
+
+        if has_terminal?("nil", false, index)
+          r0 = instantiate_node(NilNode,input, index...(index + 3))
+          @index += 3
+        else
+          terminal_parse_failure("nil")
+          r0 = nil
+        end
+
+        node_cache[:nil_value][start_index] = r0
 
         r0
       end
