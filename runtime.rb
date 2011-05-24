@@ -1,3 +1,4 @@
+require 'treetop'
 require './nodes.rb'
 require './ennio.rb'
 
