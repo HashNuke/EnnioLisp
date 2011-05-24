@@ -29,7 +29,12 @@ module Ennio
             break
           end
         end
-        r0 = instantiate_node(Program,input, i0...index, s0)
+        if s0.empty?
+          @index = i0
+          r0 = nil
+        else
+          r0 = instantiate_node(Program,input, i0...index, s0)
+        end
 
         node_cache[:program][start_index] = r0
 
@@ -429,11 +434,25 @@ module Ennio
           return cached
         end
 
-        if has_terminal?('\G[^\\s\\n\\r\\t]', true, index)
-          r0 = instantiate_node(DynamicWord,input, index...(index + 1))
-          @index += 1
-        else
+        s0, i0 = [], index
+        loop do
+          if has_terminal?('\G[a-z]', true, index)
+            r1 = true
+            @index += 1
+          else
+            r1 = nil
+          end
+          if r1
+            s0 << r1
+          else
+            break
+          end
+        end
+        if s0.empty?
+          @index = i0
           r0 = nil
+        else
+          r0 = instantiate_node(DynamicWord,input, i0...index, s0)
         end
 
         node_cache[:dynamic_word][start_index] = r0

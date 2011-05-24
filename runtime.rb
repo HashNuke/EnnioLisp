@@ -4,6 +4,7 @@ require './ennio.rb'
 class EnnioRuntime
 
     def initialize
+        puts "=> initialized runtime"
     end
 
     def parse(data, scope=nil)
@@ -13,6 +14,7 @@ class EnnioRuntime
         ast = parser.parse data
         puts ast.class.name
         if ast.nil?
+            puts "FAILURE: "
             puts parser.failure_reason
         end
     end

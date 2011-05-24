@@ -1,7 +1,8 @@
 #! /usr/bin/env ruby
 
 require "treetop"
-require "./runtime.rb"
+require "./ennio.rb"
+require "./nodes.rb"
 
 program_data = ""
 File.open "samples/hello.lp" do |file|
@@ -10,5 +11,6 @@ File.open "samples/hello.lp" do |file|
     end
 end
 
-ennio = EnnioRuntime.new
+ennio = Ennio::SchemeParser.new
 ast = ennio.parse program_data
+puts ast
