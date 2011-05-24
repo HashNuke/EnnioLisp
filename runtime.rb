@@ -13,10 +13,11 @@ class EnnioRuntime
         parser = Ennio::SchemeParser.new
         scope ||= {:global=>{}, :local=>{}}
         ast = parser.parse data
-        puts ast.class.name
         if ast.nil?
             puts "FAILURE: "
             puts parser.failure_reason
+        else
+            ast.node_eval scope
         end
     end
 end

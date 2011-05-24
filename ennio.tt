@@ -5,17 +5,25 @@ module Ennio
             s_expression+ <Program>
         end
 
+        rule l_paren
+            '(' <LParen>
+        end
+
+        rule r_paren
+            ')' <RParen>
+        end
+
         rule s_expression
             space*
-            '('
+            l_paren
             space*
-            (
+            ( 
                 operator
                 space*
                 ( value space* )*
             )
             space*
-            ')'
+            r_paren
             space*
             <SExpression>
         end
@@ -96,7 +104,7 @@ module Ennio
         end
         
         rule space
-            [\s\n\r\t]
+            [\s\n\r\t] <Space>
         end
         
         rule double_quoted_string

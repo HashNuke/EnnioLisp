@@ -1,18 +1,30 @@
 module Ennio
 
-    module Program
+    
     class Program < Treetop::Runtime::SyntaxNode
         def node_eval(scope)
-            puts text_value
             elements.each do |e|
-                puts e.class.name 
+                puts e.class.name << "=> "
+                e.node_eval(scope)
             end
         end
     end
-    end
-    
-    class SExpression < Treetop::Runtime::SyntaxNode
+   
+    class LParen < Treetop::Runtime::SyntaxNode
         def node_eval
+        end
+    end
+
+    class RParen < Treetop::Runtime::SyntaxNode
+        def node_eval
+        end
+    end
+
+    class SExpression < Treetop::Runtime::SyntaxNode
+        def node_eval(scope)
+            elements.each do |e|
+                puts e.class.name << " " << e.text_value.length.to_s << "=> " << e.text_value
+            end
         end
     end
 
@@ -43,6 +55,11 @@ module Ennio
             def node_eval
                 text_value
             end
+        end
+    end
+
+    class DynamicWord < Treetop::Runtime::SyntaxNode
+        def node_eval
         end
     end
 

@@ -9,6 +9,5 @@ File.open "samples/hello.lp" do |file|
     end
 end
 
-ennio = Ennio::SchemeParser.new
-puts program_data
-ast = ennio.parse program_data
+ennio = EnnioRuntime.new
+ennio.parse program_data
