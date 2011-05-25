@@ -14,17 +14,17 @@ module Ennio
         end
 
         rule s_expression
-            space*
+            space
             l_paren
-            space*
+            space
             ( 
                 operator
-                space*
-                ( value space* )*
+                space
+                ( value space )*
             )
-            space*
+            space
             r_paren
-            space*
+            space
             <SExpression>
         end
 
@@ -88,7 +88,7 @@ module Ennio
         end
 
         rule list
-            "'" space* '(' (value space*) ')' <List>
+            "'" space l_paren (value space)* r_paren <List>
         end
 
         rule integer
@@ -103,8 +103,12 @@ module Ennio
             ("#t" / "#f") <BooleanNode> 
         end
         
-        rule space
+        rule compulsory_space
             [\s\n\r\t] <Space>
+        end
+
+        rule space
+            compulsory_space* <Space>
         end
         
         rule double_quoted_string

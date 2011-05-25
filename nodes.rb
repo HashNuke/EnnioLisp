@@ -31,6 +31,9 @@ module Ennio
     module Operator
         class Operator < Treetop::Runtime::SyntaxNode
             def node_eval
+                elements.each do |e|
+                    puts e.text_value
+                end
             end
         end
     end

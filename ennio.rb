@@ -94,6 +94,9 @@ module Ennio
           elements[0]
         end
 
+        def space
+          elements[1]
+        end
       end
 
       module SExpression1
@@ -101,17 +104,36 @@ module Ennio
           elements[0]
         end
 
+        def space
+          elements[1]
+        end
+
       end
 
       module SExpression2
+        def space1
+          elements[0]
+        end
+
         def l_paren
           elements[1]
+        end
+
+        def space2
+          elements[2]
+        end
+
+        def space3
+          elements[4]
         end
 
         def r_paren
           elements[5]
         end
 
+        def space4
+          elements[6]
+        end
       end
 
       def _nt_s_expression
@@ -126,119 +148,65 @@ module Ennio
         end
 
         i0, s0 = index, []
-        s1, i1 = [], index
-        loop do
-          r2 = _nt_space
-          if r2
-            s1 << r2
-          else
-            break
-          end
-        end
-        r1 = instantiate_node(SyntaxNode,input, i1...index, s1)
+        r1 = _nt_space
         s0 << r1
         if r1
-          r3 = _nt_l_paren
-          s0 << r3
-          if r3
-            s4, i4 = [], index
-            loop do
-              r5 = _nt_space
+          r2 = _nt_l_paren
+          s0 << r2
+          if r2
+            r3 = _nt_space
+            s0 << r3
+            if r3
+              i4, s4 = index, []
+              r5 = _nt_operator
+              s4 << r5
               if r5
-                s4 << r5
-              else
-                break
-              end
-            end
-            r4 = instantiate_node(SyntaxNode,input, i4...index, s4)
-            s0 << r4
-            if r4
-              i6, s6 = index, []
-              r7 = _nt_operator
-              s6 << r7
-              if r7
-                s8, i8 = [], index
-                loop do
-                  r9 = _nt_space
-                  if r9
-                    s8 << r9
-                  else
-                    break
-                  end
-                end
-                r8 = instantiate_node(SyntaxNode,input, i8...index, s8)
-                s6 << r8
-                if r8
-                  s10, i10 = [], index
+                r6 = _nt_space
+                s4 << r6
+                if r6
+                  s7, i7 = [], index
                   loop do
-                    i11, s11 = index, []
-                    r12 = _nt_value
-                    s11 << r12
-                    if r12
-                      s13, i13 = [], index
-                      loop do
-                        r14 = _nt_space
-                        if r14
-                          s13 << r14
-                        else
-                          break
-                        end
-                      end
-                      r13 = instantiate_node(SyntaxNode,input, i13...index, s13)
-                      s11 << r13
+                    i8, s8 = index, []
+                    r9 = _nt_value
+                    s8 << r9
+                    if r9
+                      r10 = _nt_space
+                      s8 << r10
                     end
-                    if s11.last
-                      r11 = instantiate_node(SyntaxNode,input, i11...index, s11)
-                      r11.extend(SExpression0)
+                    if s8.last
+                      r8 = instantiate_node(SyntaxNode,input, i8...index, s8)
+                      r8.extend(SExpression0)
                     else
-                      @index = i11
-                      r11 = nil
+                      @index = i8
+                      r8 = nil
                     end
-                    if r11
-                      s10 << r11
+                    if r8
+                      s7 << r8
                     else
                       break
                     end
                   end
-                  r10 = instantiate_node(SyntaxNode,input, i10...index, s10)
-                  s6 << r10
+                  r7 = instantiate_node(SyntaxNode,input, i7...index, s7)
+                  s4 << r7
                 end
               end
-              if s6.last
-                r6 = instantiate_node(SyntaxNode,input, i6...index, s6)
-                r6.extend(SExpression1)
+              if s4.last
+                r4 = instantiate_node(SyntaxNode,input, i4...index, s4)
+                r4.extend(SExpression1)
               else
-                @index = i6
-                r6 = nil
+                @index = i4
+                r4 = nil
               end
-              s0 << r6
-              if r6
-                s15, i15 = [], index
-                loop do
-                  r16 = _nt_space
-                  if r16
-                    s15 << r16
-                  else
-                    break
-                  end
-                end
-                r15 = instantiate_node(SyntaxNode,input, i15...index, s15)
-                s0 << r15
-                if r15
-                  r17 = _nt_r_paren
-                  s0 << r17
-                  if r17
-                    s18, i18 = [], index
-                    loop do
-                      r19 = _nt_space
-                      if r19
-                        s18 << r19
-                      else
-                        break
-                      end
-                    end
-                    r18 = instantiate_node(SyntaxNode,input, i18...index, s18)
-                    s0 << r18
+              s0 << r4
+              if r4
+                r11 = _nt_space
+                s0 << r11
+                if r11
+                  r12 = _nt_r_paren
+                  s0 << r12
+                  if r12
+                    r13 = _nt_space
+                    s0 << r13
                   end
                 end
               end
@@ -664,9 +632,23 @@ module Ennio
           elements[0]
         end
 
+        def space
+          elements[1]
+        end
       end
 
       module List1
+        def space
+          elements[1]
+        end
+
+        def l_paren
+          elements[2]
+        end
+
+        def r_paren
+          elements[4]
+        end
       end
 
       def _nt_list
@@ -690,60 +672,39 @@ module Ennio
         end
         s0 << r1
         if r1
-          s2, i2 = [], index
-          loop do
-            r3 = _nt_space
-            if r3
-              s2 << r3
-            else
-              break
-            end
-          end
-          r2 = instantiate_node(SyntaxNode,input, i2...index, s2)
+          r2 = _nt_space
           s0 << r2
           if r2
-            if has_terminal?('(', false, index)
-              r4 = instantiate_node(SyntaxNode,input, index...(index + 1))
-              @index += 1
-            else
-              terminal_parse_failure('(')
-              r4 = nil
-            end
-            s0 << r4
-            if r4
-              i5, s5 = index, []
-              r6 = _nt_value
-              s5 << r6
-              if r6
-                s7, i7 = [], index
-                loop do
-                  r8 = _nt_space
-                  if r8
-                    s7 << r8
-                  else
-                    break
-                  end
+            r3 = _nt_l_paren
+            s0 << r3
+            if r3
+              s4, i4 = [], index
+              loop do
+                i5, s5 = index, []
+                r6 = _nt_value
+                s5 << r6
+                if r6
+                  r7 = _nt_space
+                  s5 << r7
                 end
-                r7 = instantiate_node(SyntaxNode,input, i7...index, s7)
-                s5 << r7
-              end
-              if s5.last
-                r5 = instantiate_node(SyntaxNode,input, i5...index, s5)
-                r5.extend(List0)
-              else
-                @index = i5
-                r5 = nil
-              end
-              s0 << r5
-              if r5
-                if has_terminal?(')', false, index)
-                  r9 = instantiate_node(SyntaxNode,input, index...(index + 1))
-                  @index += 1
+                if s5.last
+                  r5 = instantiate_node(SyntaxNode,input, i5...index, s5)
+                  r5.extend(List0)
                 else
-                  terminal_parse_failure(')')
-                  r9 = nil
+                  @index = i5
+                  r5 = nil
                 end
-                s0 << r9
+                if r5
+                  s4 << r5
+                else
+                  break
+                end
+              end
+              r4 = instantiate_node(SyntaxNode,input, i4...index, s4)
+              s0 << r4
+              if r4
+                r8 = _nt_r_paren
+                s0 << r8
               end
             end
           end
@@ -919,10 +880,10 @@ module Ennio
         r0
       end
 
-      def _nt_space
+      def _nt_compulsory_space
         start_index = index
-        if node_cache[:space].has_key?(index)
-          cached = node_cache[:space][index]
+        if node_cache[:compulsory_space].has_key?(index)
+          cached = node_cache[:compulsory_space][index]
           if cached
             cached = SyntaxNode.new(input, index...(index + 1)) if cached == true
             @index = cached.interval.end
@@ -936,6 +897,33 @@ module Ennio
         else
           r0 = nil
         end
+
+        node_cache[:compulsory_space][start_index] = r0
+
+        r0
+      end
+
+      def _nt_space
+        start_index = index
+        if node_cache[:space].has_key?(index)
+          cached = node_cache[:space][index]
+          if cached
+            cached = SyntaxNode.new(input, index...(index + 1)) if cached == true
+            @index = cached.interval.end
+          end
+          return cached
+        end
+
+        s0, i0 = [], index
+        loop do
+          r1 = _nt_compulsory_space
+          if r1
+            s0 << r1
+          else
+            break
+          end
+        end
+        r0 = instantiate_node(Space,input, i0...index, s0)
 
         node_cache[:space][start_index] = r0
 
