@@ -32,7 +32,7 @@ module Ennio
         class Operator < Treetop::Runtime::SyntaxNode
             def node_eval
                 elements.each do |e|
-                    puts e.text_value
+                    puts "yes" if e.kind_of? ArithmeticOperator
                 end
             end
         end
